@@ -91,22 +91,44 @@ public class Lights_Behaviour : MonoBehaviour
         //Nightly Traffic Lights System
         if(Input.GetKeyDown(KeyCode.H))
         {
-            mode = true;
-            change = false;
+            if (mode == true)
+            {
+                mode = false;
+                Object_First.Green.intensity = 1.2f;
+                Object_First.Green_1.intensity = 1.2f;
+                Object_First.Yellow.intensity = 0;
+                Object_First.Yellow_1.intensity = 0;
+                Object_First.Red.intensity = 0;
+                Object_First.Red_1.intensity = 0;
 
-            Object_First.Green.intensity = 0;
-            Object_First.Green_1.intensity = 0;
-            Object_First.Yellow.intensity = 1.2f;
-            Object_First.Yellow_1.intensity = 1.2f;
-            Object_First.Red.intensity = 0;
-            Object_First.Red_1.intensity = 0;
+                Object_Second.Green.intensity = 0;
+                Object_Second.Green_1.intensity = 0;
+                Object_Second.Yellow.intensity = 0;
+                Object_Second.Yellow_1.intensity = 0;
+                Object_Second.Red.intensity = 1.2f;
+                Object_Second.Red_1.intensity = 1.2f;
+            }
+            else
+            {
+                mode = true;
+                change = false;
 
-            Object_Second.Green.intensity = 0;
-            Object_Second.Green_1.intensity = 0;
-            Object_Second.Yellow.intensity = 1.2f;
-            Object_Second.Yellow_1.intensity = 1.2f;
-            Object_Second.Red.intensity = 0;
-            Object_Second.Red_1.intensity = 0;
+                Object_First.Green.intensity = 0;
+                Object_First.Green_1.intensity = 0;
+                Object_First.Yellow.intensity = 1.2f;
+                Object_First.Yellow_1.intensity = 1.2f;
+                Object_First.Red.intensity = 0;
+                Object_First.Red_1.intensity = 0;
+
+                Object_Second.Green.intensity = 0;
+                Object_Second.Green_1.intensity = 0;
+                Object_Second.Yellow.intensity = 1.2f;
+                Object_Second.Yellow_1.intensity = 1.2f;
+                Object_Second.Red.intensity = 0;
+                Object_Second.Red_1.intensity = 0;
+            }
+           
+
 
             nextUpdate = Mathf.FloorToInt(Time.time) + 2;
         }
