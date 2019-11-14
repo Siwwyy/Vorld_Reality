@@ -20,7 +20,9 @@ public class Lights_Behaviour : MonoBehaviour
         YELLOW = 1,
         RED = 2
     }
-    //TRAFFIC_LIGHT_COLOR current_light;
+
+    TRAFFIC_LIGHT_COLOR current_light_first;
+    TRAFFIC_LIGHT_COLOR current_light_second;
     public Update_Lights Object_First;
     public Update_Lights_2 Object_Second;
     // Start is called before the first frame update
@@ -90,6 +92,7 @@ public class Lights_Behaviour : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.H))
         {
             mode = true;
+            change = false;
 
             Object_First.Green.intensity = 0;
             Object_First.Green_1.intensity = 0;
@@ -123,6 +126,9 @@ public class Lights_Behaviour : MonoBehaviour
                     Object_Second.Yellow.intensity = 1.2f;
                     Object_Second.Yellow_1.intensity = 1.2f;
 
+                    current_light_first = TRAFFIC_LIGHT_COLOR.YELLOW;
+                    current_light_second = TRAFFIC_LIGHT_COLOR.YELLOW;
+
                     nextUpdate = Mathf.FloorToInt(Time.time) + Yellow_Delay;
                 }
                 else if (Object_First.Yellow.intensity > 0)
@@ -137,6 +143,9 @@ public class Lights_Behaviour : MonoBehaviour
                     Object_Second.Green.intensity = 1.2f;
                     Object_Second.Green_1.intensity = 1.2f;
 
+                    current_light_first = TRAFFIC_LIGHT_COLOR.RED;
+                    current_light_second = TRAFFIC_LIGHT_COLOR.GREEN;
+
                     nextUpdate = Mathf.FloorToInt(Time.time) + Red_Delay;
                 }
                 else if (Object_First.Red.intensity > 0)
@@ -150,6 +159,9 @@ public class Lights_Behaviour : MonoBehaviour
                     Object_Second.Green_1.intensity = 0;
                     Object_Second.Yellow.intensity = 1.2f;
                     Object_Second.Yellow_1.intensity = 1.2f;
+
+                    current_light_first = TRAFFIC_LIGHT_COLOR.YELLOW;
+                    current_light_second = TRAFFIC_LIGHT_COLOR.YELLOW;
 
                     change = false;
                     nextUpdate = Mathf.FloorToInt(Time.time) + Green_Delay;
@@ -168,6 +180,9 @@ public class Lights_Behaviour : MonoBehaviour
                     Object_Second.Yellow_1.intensity = 0;
                     Object_Second.Red.intensity = 1.2f;
                     Object_Second.Red_1.intensity = 1.2f;
+
+                    current_light_first = TRAFFIC_LIGHT_COLOR.GREEN;
+                    current_light_second = TRAFFIC_LIGHT_COLOR.RED;
 
                     nextUpdate = Mathf.FloorToInt(Time.time) + Green_Delay;
                 }
@@ -199,9 +214,21 @@ public class Lights_Behaviour : MonoBehaviour
 
                     nextUpdate = Mathf.FloorToInt(Time.time) + 1;
                 }
+                current_light_first = TRAFFIC_LIGHT_COLOR.YELLOW;
+                current_light_second = TRAFFIC_LIGHT_COLOR.YELLOW;
             }
         }
 
 
+    }
+
+    public TRAFFIC_LIGHT_COLOR Get_Current_Light_First()
+    {
+        return current_light_first;
+    }
+
+    public TRAFFIC_LIGHT_COLOR Get_Current_Light_Second()
+    {
+        return current_light_second;
     }
 }
