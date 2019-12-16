@@ -8,6 +8,7 @@ public class Killer : MonoBehaviour
 
     public AIPath path;
     private Spawner spawner;
+    private float timer;
     // Update is called once per frame
 
     void Start()
@@ -17,11 +18,13 @@ public class Killer : MonoBehaviour
 
     void Update()
     {
-        if (path.reachedDestination)
+        if (path.reachedDestination || timer >= 120)
         {
             spawner.ilosc--;
             Destroy(gameObject);
         }
+        else
+            timer += Time.deltaTime;
             
     }
 }

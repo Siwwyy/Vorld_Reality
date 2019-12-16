@@ -9,12 +9,13 @@ public class Spawn : MonoBehaviour
     private GameObject[] targets;
     public int ilosc;
     public int spawnRate;
-    private float timer;
+    public float timer;
     public int am;
     // Start is called before the first frame update
     void Start()
     {
         targets = GameObject.FindGameObjectsWithTag("Pavement");
+        timer = 0;
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class Spawn : MonoBehaviour
         randomTarget = targets[Random.Range(0, targets.Length)];
         if (ilosc <= am)
         {
-            if(timer <= spawnRate)
+            if(timer >= spawnRate)
             {
                 timer = 0;
                 GameObject go = Instantiate(ob, randomTarget.transform.position, Quaternion.identity) as GameObject;
