@@ -28,6 +28,7 @@ public class Spawn : MonoBehaviour
                 timer = 0;
                 GameObject go = Instantiate(ob, randomTarget.transform.position, Quaternion.identity) as GameObject;
                 go.transform.parent = transform;
+                go.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 ilosc++;
             }
             else
