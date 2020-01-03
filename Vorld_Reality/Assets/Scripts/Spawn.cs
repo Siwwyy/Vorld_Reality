@@ -28,12 +28,12 @@ public class Spawn : MonoBehaviour
                 timer = 0;
                 GameObject go = Instantiate(ob, randomTarget.transform.position, Quaternion.identity) as GameObject;
                 go.transform.parent = transform;
-<<<<<<< HEAD
+
                 GlobalVariables.ilosc++;
-=======
+
                 go.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                ilosc++;
->>>>>>> a3b9b206f182473b110dcd7c71536363adee7491
+                //ilosc++;
+
             }
             else
                 timer += Time.deltaTime;
