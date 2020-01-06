@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Lights_Behaviour : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Lights_Behaviour : MonoBehaviour
     private bool change = false;
     private float nextUpdate = 1.0f;
     private bool mode = false;
+    public AstarPath Path;
     //////////////////////////////////////////////////////////
     public enum TRAFFIC_LIGHT_COLOR
     {
@@ -24,11 +26,8 @@ public class Lights_Behaviour : MonoBehaviour
     TRAFFIC_LIGHT_COLOR current_light_first;
     TRAFFIC_LIGHT_COLOR current_light_second;
     public GameObject Car1;
-    public GameObject Bus;
     private GameObject Car1_Clone;
-    private GameObject Bus_Clone;
     public GameObject Point_Car1;
-    public GameObject Point_Bus;
     public GameObject Car2;
     private GameObject Car2_Clone;
     public GameObject Point_Car2;
@@ -38,20 +37,18 @@ public class Lights_Behaviour : MonoBehaviour
     */
     public GameObject Spawn_Car1;
     public GameObject Spawn_Car2;
-    public GameObject Spawn_Bus;
     /*
       DESTROYING
     */
     public GameObject Destroy_Car1;
     public GameObject Destroy_Car2;
-    public GameObject Destroy_Bus;
 
     public Update_Lights Object_First;
     public Update_Lights_2 Object_Second;
     // Start is called before the first frame update
     void Start()
     {
-
+        Path.Scan();
         if (mode == false)
         {
             Object_First.Green.intensity = 1.2f;
@@ -102,67 +99,33 @@ public class Lights_Behaviour : MonoBehaviour
         //Limanowskiego
         if (current_light_first == TRAFFIC_LIGHT_COLOR.GREEN)
         {
-            Car1.transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Car1.transform.position.z + 0.1f);
-            Bus.transform.position = new Vector3(Bus.transform.position.x, Bus.transform.position.y, Bus.transform.position.z - 0.1f);
+            transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Car1.transform.position.z + 0.1f);
+            Car1.transform.position = transform.position;
         }
         else if(current_light_first == TRAFFIC_LIGHT_COLOR.RED)
         {
-            //CAR
             if (Car1.transform.position.z == Point_Car1.transform.position.z)
             {
-                Car1.transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Point_Car1.transform.position.z);
+                transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Point_Car1.transform.position.z);
+                Car1.transform.position = transform.position;
             }
-            else if (Car1.transform.position.z > Point_Car1.transform.position.z)
+            else if (Car1.transform.position.z <= Point_Car1.transform.position.z)
             {
-                Car1.transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Car1.transform.position.z + 0.1f);
-            }
-            else if (Car1.transform.position.z < Point_Car1.transform.position.z - 1.0f)
-            {
-                Car1.transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Car1.transform.position.z + 0.1f);
-            }
-
-            //BUS
-            if (Bus.transform.position.z == Point_Bus.transform.position.z)
-            {
-                Bus.transform.position = new Vector3(Bus.transform.position.x, Bus.transform.position.y, Point_Bus.transform.position.z);
-            }
-            else if (Bus.transform.position.z < Point_Bus.transform.position.z)
-            {
-                Bus.transform.position = new Vector3(Bus.transform.position.x, Bus.transform.position.y, Bus.transform.position.z - 0.1f);
-            }
-            else if (Bus.transform.position.z > Point_Bus.transform.position.z + 1.0f)
-            {
-                Bus.transform.position = new Vector3(Bus.transform.position.x, Bus.transform.position.y, Bus.transform.position.z - 0.1f);
+                transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Car1.transform.position.z + 0.1f);
+                Car1.transform.position = transform.position;
             }
         }
         else
         {
-            //BUS
             if (Car1.transform.position.z == Point_Car1.transform.position.z)
             {
-                Car1.transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Point_Car1.transform.position.z);
+                transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Point_Car1.transform.position.z);
+                Car1.transform.position = transform.position;
             }
-            else if (Car1.transform.position.z > Point_Car1.transform.position.z)
+            else if (Car1.transform.position.z <= Point_Car1.transform.position.z)
             {
-                Car1.transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Car1.transform.position.z + 0.1f);
-            }
-            else if (Car1.transform.position.z < Point_Car1.transform.position.z - 1.0f)
-            {
-                Car1.transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Car1.transform.position.z + 0.1f);
-            }
-
-            //BUS
-            if (Bus.transform.position.z == Point_Bus.transform.position.z)
-            {
-                Bus.transform.position = new Vector3(Bus.transform.position.x, Bus.transform.position.y, Point_Bus.transform.position.z);
-            }
-            else if (Bus.transform.position.z < Point_Bus.transform.position.z)
-            {
-                Bus.transform.position = new Vector3(Bus.transform.position.x, Bus.transform.position.y, Bus.transform.position.z - 0.1f);
-            }
-            else if (Bus.transform.position.z > Point_Bus.transform.position.z + 1.0f)
-            {
-                Bus.transform.position = new Vector3(Bus.transform.position.x, Bus.transform.position.y, Bus.transform.position.z - 0.1f);
+                transform.position = new Vector3(Car1.transform.position.x, Car1.transform.position.y, Car1.transform.position.z + 0.1f);
+                Car1.transform.position = transform.position;
             }
         }
         //Debug.Log("First: "+current_light_first + " " + '\n');
@@ -170,36 +133,33 @@ public class Lights_Behaviour : MonoBehaviour
         //Pomorska
         if (current_light_second == TRAFFIC_LIGHT_COLOR.GREEN)
         {
-            Car2.transform.position = new Vector3(Car2.transform.position.x + 0.1f, Car2.transform.position.y, Car2.transform.position.z);
+            transform.position = new Vector3(Car2.transform.position.x + 0.1f, Car2.transform.position.y, Car2.transform.position.z);
+            Car2.transform.position = transform.position;
         }
         else if (current_light_second == TRAFFIC_LIGHT_COLOR.RED)
         {
             if (Car2.transform.position.x == Point_Car2.transform.position.x)
             {
-                Car2.transform.position = new Vector3(Point_Car2.transform.position.x, Car2.transform.position.y, Car2.transform.position.z);
+                transform.position = new Vector3(Point_Car2.transform.position.x, Car2.transform.position.y, Car2.transform.position.z);
+                Car2.transform.position = transform.position;
             }
-            else if (Car2.transform.position.x > Point_Car2.transform.position.x)
+            else if (Car2.transform.position.x <= Point_Car2.transform.position.x)
             {
-                Car2.transform.position = new Vector3(Car2.transform.position.x + 0.1f, Car2.transform.position.y, Car2.transform.position.z);
-            }
-            else if(Car2.transform.position.x <= Point_Car2.transform.position.x - 1.0f)
-            {
-                Car2.transform.position = new Vector3(Car2.transform.position.x + 0.1f, Car2.transform.position.y, Car2.transform.position.z);
+                transform.position = new Vector3(Car2.transform.position.x + 0.1f, Car2.transform.position.y, Car2.transform.position.z);
+                Car2.transform.position = transform.position;
             }
         }
         else
         {
             if (Car2.transform.position.x == Point_Car2.transform.position.x)
             {
-                Car2.transform.position = new Vector3(Point_Car2.transform.position.x, Car2.transform.position.y, Car2.transform.position.z);
+                transform.position = new Vector3(Point_Car2.transform.position.x, Car2.transform.position.y, Car2.transform.position.z);
+                Car2.transform.position = transform.position;
             }
-            else if (Car2.transform.position.x > Point_Car2.transform.position.x)
+            else if (Car2.transform.position.x <= Point_Car2.transform.position.x)
             {
-                Car2.transform.position = new Vector3(Car2.transform.position.x + 0.1f, Car2.transform.position.y, Car2.transform.position.z);
-            }
-            else if (Car2.transform.position.x < Point_Car2.transform.position.x - 1.0f)
-            {
-                Car2.transform.position = new Vector3(Car2.transform.position.x + 0.1f, Car2.transform.position.y, Car2.transform.position.z);
+                transform.position = new Vector3(Car2.transform.position.x + 0.1f, Car2.transform.position.y, Car2.transform.position.z);
+                Car2.transform.position = transform.position;
             }
         }
 
@@ -210,7 +170,7 @@ public class Lights_Behaviour : MonoBehaviour
             Car1_Clone = Instantiate(Car1, Spawn_Car1.transform.position, Quaternion.identity) as GameObject;
             ///////////////////////////////////////
             Destroy(Car1);
-            Car1 = Instantiate(Car1_Clone, Spawn_Car1.transform.position, Quaternion.identity) as GameObject;
+            Car1 = Instantiate(Car1_Clone, Spawn_Car1.transform.position, Quaternion.identity) as GameObject; ;
             Destroy(Car1_Clone);
         }
         if(Car2.transform.position.x >= Destroy_Car2.transform.position.x)
@@ -222,15 +182,6 @@ public class Lights_Behaviour : MonoBehaviour
             Car2 = Instantiate(Car2_Clone, Spawn_Car2.transform.position, Quaternion.Euler(0,90,0)) as GameObject;
             Destroy(Car2_Clone);
         }
-        if(Bus.transform.position.z <= Destroy_Bus.transform.position.z)
-        {
-            //Initialize clones first
-            Bus_Clone = Instantiate(Bus, Spawn_Bus.transform.position, Quaternion.identity) as GameObject;
-            ///////////////////////////////////////
-            Destroy(Bus);
-            Bus = Instantiate(Bus_Clone, Spawn_Bus.transform.position, Quaternion.identity) as GameObject;
-            Destroy(Bus_Clone);
-        }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -240,6 +191,7 @@ public class Lights_Behaviour : MonoBehaviour
         {
             change = true;
             mode = false;
+            Path.Scan();
 
             Object_First.Green.intensity = 1.2f;
             Object_First.Green_1.intensity = 1.2f;
@@ -261,6 +213,7 @@ public class Lights_Behaviour : MonoBehaviour
         //Nightly Traffic Lights System
         if(Input.GetKeyDown(KeyCode.H))
         {
+            Path.Scan();
             if (mode == true)
             {
                 mode = false;
@@ -309,7 +262,7 @@ public class Lights_Behaviour : MonoBehaviour
         {
             if (change == true)
             {
-
+                Path.Scan();
                 if (Object_First.Green.intensity > 0)
                 {
                     Object_First.Green.intensity = 0;
