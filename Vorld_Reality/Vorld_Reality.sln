@@ -1,8 +1,21 @@
 ﻿
+<<<<<<< HEAD
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{12F708F1-DA1C-65FB-1A82-D0B86A1522E8}"
 EndProject
+=======
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{12F708F1-DA1C-65FB-1A82-D0B86A1522E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstarPathfindingProject", "AstarPathfindingProject.csproj", "{0127010D-B5EB-231D-37BC-BBBF8596622A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstarPathfindingProjectEditor", "AstarPathfindingProjectEditor.csproj", "{9DB5ED51-C9F7-349A-D5E2-38EAC1227B48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageToolsEditor", "PackageToolsEditor.csproj", "{EB2224D0-62FF-5DCB-DDF0-BC5139E0D691}"
+EndProject
+>>>>>>> Siwy
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +26,21 @@ Global
 		{12F708F1-DA1C-65FB-1A82-D0B86A1522E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12F708F1-DA1C-65FB-1A82-D0B86A1522E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12F708F1-DA1C-65FB-1A82-D0B86A1522E8}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+=======
+		{0127010D-B5EB-231D-37BC-BBBF8596622A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0127010D-B5EB-231D-37BC-BBBF8596622A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0127010D-B5EB-231D-37BC-BBBF8596622A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0127010D-B5EB-231D-37BC-BBBF8596622A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB5ED51-C9F7-349A-D5E2-38EAC1227B48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB5ED51-C9F7-349A-D5E2-38EAC1227B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB5ED51-C9F7-349A-D5E2-38EAC1227B48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB5ED51-C9F7-349A-D5E2-38EAC1227B48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB2224D0-62FF-5DCB-DDF0-BC5139E0D691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2224D0-62FF-5DCB-DDF0-BC5139E0D691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2224D0-62FF-5DCB-DDF0-BC5139E0D691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2224D0-62FF-5DCB-DDF0-BC5139E0D691}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> Siwy
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
